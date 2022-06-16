@@ -2,7 +2,11 @@
     $active='Home';
     include("includes/header.php");
 ?>   
-
+<style>
+.checked {
+  color: orange;
+}
+</style>
    <div class="container" id="slider">       
        <div class="col-md-12">           
            <div class="carousel slide" id="myCarousel" data-ride="carousel">               

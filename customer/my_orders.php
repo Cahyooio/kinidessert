@@ -74,7 +74,7 @@
                 <td> <?php if($review_status=='pending' && $order_status =='Terbayar'){
                    echo  "<a href='../rating/rating.php?order_id=$order_id&&product_id=$product_id' target='_blank' class='btn btn-info btn-sm'> Masukkan Review </a>";
                 }elseif ($review_status=='complete' && $order_status =='Terbayar'){
-                    echo 'Terimakasih Telah Memberikan Review';
+                    echo "<a href='../lihat_rating/rating.php?order_id=$order_id&&product_id=$product_id' target='_blank' class='btn btn-info btn-sm'> Lihat Rating </a>";
                 }else{
                     echo 'Silahkan Melakukan Pembayaran';
                 }

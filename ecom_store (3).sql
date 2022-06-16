@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2022 at 05:07 PM
+-- Generation Time: May 30, 2022 at 06:14 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -133,7 +133,6 @@ CREATE TABLE `customer_orders` (
   `size` text NOT NULL,
   `order_date` date NOT NULL,
   `order_status` text NOT NULL,
-  `review_status` text NOT NULL,
   `tujuan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -141,19 +140,14 @@ CREATE TABLE `customer_orders` (
 -- Dumping data for table `customer_orders`
 --
 
-INSERT INTO `customer_orders` (`order_id`, `product_id`, `customer_id`, `due_amount`, `invoice_no`, `qty`, `size`, `order_date`, `order_status`, `review_status`, `tujuan`) VALUES
-(159, '123', 22, 75000, 1711846795, 1, 'M', '2022-04-02', 'Complete', 'pending', 'alamat1'),
-(160, '125', 22, 70000, 379287478, 2, 'M', '2022-04-11', 'Complete', 'pending', 'alamat1'),
-(161, '122', 22, 190000, 1721668501, 4, 'M', '2022-04-11', 'Complete', 'dfdf', 'alamat1'),
-(162, '124', 22, 45000, 1456045989, 1, 'L', '2022-04-11', 'Complete', 'complete', 'alamat1'),
-(163, '123', 22, 140000, 1255432850, 2, 'M', '2022-04-11', 'pending', 'pending', 'alamat1'),
-(164, '124', 22, 45000, 1255432850, 1, 'M', '2022-04-11', 'pending', 'pending', 'alamat1'),
-(165, '125', 22, 40000, 100262990, 1, '', '2022-05-25', 'Complete', 'pending', 'alamat1'),
-(166, '124', 22, 45000, 1756076098, 1, '', '2022-05-30', 'pending', 'pending', 'alamat1'),
-(167, '125', 22, 40000, 1625951904, 1, '', '2022-05-30', 'pending', 'pending', 'alamat1'),
-(168, '', 0, 0, 0, 0, '', '0000-00-00', '', 'pending', ''),
-(169, '123', 22, 140000, 879900380, 2, 'L', '2022-06-08', 'pending', 'complete', 'alamat1'),
-(170, '125', 22, 40000, 988282223, 1, '', '2022-06-08', 'pending', 'pending', 'alamat1');
+INSERT INTO `customer_orders` (`order_id`, `product_id`, `customer_id`, `due_amount`, `invoice_no`, `qty`, `size`, `order_date`, `order_status`, `tujuan`) VALUES
+(159, '123', 22, 75000, 1711846795, 1, 'M', '2022-04-02', 'Complete', 'alamat1'),
+(160, '125', 22, 70000, 379287478, 2, 'M', '2022-04-11', 'Complete', 'alamat1'),
+(161, '122', 22, 190000, 1721668501, 4, 'M', '2022-04-11', 'Complete', 'alamat1'),
+(162, '124', 22, 45000, 1456045989, 1, 'L', '2022-04-11', 'Complete', 'alamat1'),
+(163, '123', 22, 140000, 1255432850, 2, 'M', '2022-04-11', 'pending', 'alamat1'),
+(164, '124', 22, 45000, 1255432850, 1, 'M', '2022-04-11', 'pending', 'alamat1'),
+(165, '125', 22, 40000, 100262990, 1, '', '2022-05-25', 'Complete', 'alamat1');
 
 -- --------------------------------------------------------
 
@@ -214,11 +208,7 @@ INSERT INTO `pending_orders` (`order_id`, `customer_id`, `invoice_no`, `product_
 (160, 22, 1456045989, '124', 1, 'L', 'pending'),
 (161, 22, 1255432850, '123', 2, 'M', 'pending'),
 (162, 22, 1255432850, '124', 1, 'M', 'pending'),
-(163, 22, 100262990, '125', 1, '', 'pending'),
-(164, 22, 1756076098, '124', 1, '', 'pending'),
-(165, 22, 1625951904, '125', 1, '', 'pending'),
-(166, 22, 879900380, '123', 2, 'L', 'pending'),
-(167, 22, 988282223, '125', 1, '', 'pending');
+(163, 22, 100262990, '125', 1, '', 'pending');
 
 -- --------------------------------------------------------
 
@@ -260,39 +250,20 @@ INSERT INTO `products` (`product_id`, `cat_id`, `cat2_id`, `date`, `product_titl
 
 CREATE TABLE `review_table` (
   `review_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
   `user_name` varchar(20) NOT NULL,
   `user_rating` int(2) NOT NULL,
   `user_review` text NOT NULL,
-  `datetime` int(11) NOT NULL
+  `submit_time` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `review_table`
 --
 
-INSERT INTO `review_table` (`review_id`, `order_id`, `product_id`, `user_name`, `user_rating`, `user_review`, `datetime`) VALUES
-(30, 165, 125, 'cahyo@gmail.com', 3, 'asuuuu', 1654675267),
-(31, 162, 124, 'cahyo@gmail.com', 4, 'AAAAAA', 1654677510),
-(34, 162, 124, 'cahyo@gmail.com', 4, 'z', 1654677959),
-(35, 162, 124, 'cahyo@gmail.com', 3, '2222', 1654678025),
-(36, 162, 124, 'cahyo@gmail.com', 4, '4545454', 1654678209),
-(37, 162, 124, 'cahyo@gmail.com', 5, 'ssss', 1654678256),
-(38, 162, 124, 'cahyo@gmail.com', 3, 'aaaaa', 1654678274),
-(39, 162, 124, 'cahyo@gmail.com', 4, 'z', 1654678303),
-(40, 161, 122, 'cahyo@gmail.com', 5, 'wwww', 1654678441),
-(41, 169, 123, 'cahyo@gmail.com', 4, '2354', 1654678771),
-(42, 161, 122, 'cahyo@gmail.com', 5, '23333', 1654678810),
-(43, 169, 123, 'cahyo@gmail.com', 4, '2', 1654678841),
-(44, 162, 124, 'cahyo@gmail.com', 5, '67', 1654679595),
-(45, 169, 123, 'cahyo@gmail.com', 3, 's', 1654681397),
-(46, 169, 123, 'cahyo@gmail.com', 4, '23', 1654681719),
-(47, 169, 123, 'cahyo@gmail.com', 5, '222', 1654681816),
-(48, 169, 123, 'cahyo@gmail.com', 3, '4', 1654681837),
-(49, 169, 123, 'cahyo@gmail.com', 4, '1', 1654683733),
-(50, 169, 123, 'cahyo@gmail.com', 5, '23', 1654683773),
-(51, 169, 123, 'cahyo@gmail.com', 3, 'assss', 1654683902);
+INSERT INTO `review_table` (`review_id`, `user_name`, `user_rating`, `user_review`, `submit_time`) VALUES
+(1, 'asda', 4, 'asdads', '0000-00-00'),
+(2, 'sdasda', 5, 'asdas', '0000-00-00'),
+(3, 'asda', 5, 'asda', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -475,7 +446,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `customer_orders`
 --
 ALTER TABLE `customer_orders`
-  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
+  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -487,7 +458,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `pending_orders`
 --
 ALTER TABLE `pending_orders`
-  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -499,7 +470,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `review_table`
 --
 ALTER TABLE `review_table`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `size_product`

@@ -47,6 +47,11 @@ if(isset($_GET['pro_id'])){
     <link rel="stylesheet" href="styles/bootstrap-337.min.css">
     <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/style.css">
+    <style>
+.checked {
+  color: orange;
+}
+</style>
 </head>
 <body>  
    <div id="navbar" class="navbar navbar-default">       
@@ -215,7 +220,8 @@ if(isset($_GET['pro_id'])){
                                         ";
                                     }                               
                                ?>                               
-                               <p class="text-center buttons"><button class="btn btn-info i fa fa-shopping-cart"> Tambah Ke Keranjang</button></p>                               
+                               <p class="text-center buttons"><button class="btn btn-info i fa fa-shopping-cart"> Tambah Ke Keranjang</button></p>  
+                               <p class="text-center buttons"><a href="./lihat_rating_produk/rating.php?product_id=<?php echo $product_id; ?>" target='_blank' class="btn btn-info i fa fa-shopping-cart"> Lihat Review</a></p>                              
                            </form>                           
                        </div>                       
                        <div class="row" id="thumbs">                           
@@ -307,6 +313,11 @@ if(isset($_GET['pro_id'])){
                 
                         }
                         
+                        $get_review = "select avg (user_rating) as rating from review_table where product_id= '$pro_id'";
+                        $select_review = mysqli_query($con,$get_review);
+                        $review = mysqli_fetch_array($select_review);
+                        // var_dump ($review);
+
                         echo "
                         
                         <div class='col-md-3 col-sm-6 center-responsive'> 
@@ -346,8 +357,14 @@ if(isset($_GET['pro_id'])){
                                     </p>
                                 
                                     <p class='sold'><b>
-                
-                                        Terjual $pro_sold Produk
+                        
+                                        Terjual $pro_sold Produk <br> 
+                                        
+                                        <span class='fa fa-star ". ((intval($review['rating']) >=1) ? 'checked' : ' ')."'></span>
+                                        <span class='fa fa-star ". ((intval($review['rating']) >=2) ? 'checked' : ' ')."'></span>
+                                        <span class='fa fa-star ". ((intval($review['rating']) >=3) ? 'checked' : ' ')."'></span>
+                                        <span class='fa fa-star ". ((intval($review['rating']) >=4) ? 'checked' : ' ')."'></span>
+                                        <span class='fa fa-star ". ((intval($review['rating']) >=5) ? 'checked' : ' ')."'></span>
                 
                                    </b> </p>
                                 </div>
@@ -364,10 +381,6 @@ if(isset($_GET['pro_id'])){
                    ?>                   
                </div>   
            </div>  
-           <!--review -->
-           <h2 class="mt-5 mb-5" style="text-align:Center">Review & Rating Produk</h2>
-           
-
        </div>
    </div>   
    <?php     

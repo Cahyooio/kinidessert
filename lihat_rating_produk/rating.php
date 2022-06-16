@@ -5,9 +5,7 @@ if(!isset($_SESSION['customer_email'])){
 }else
 include("../includes/db.php");
 include("../functions/functions.php");    
-if(isset($_GET['order_id'])){    
-    $order_id = $_GET['order_id'];    
-}
+
 ?>
 
 <!DOCTYPE HTML>
@@ -22,29 +20,12 @@ if(isset($_GET['order_id'])){
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <title>Kini Dessert</title>
 </head>
-<?php     
-    $get_orders = "select * from customer_orders where order_id='$order_id'";
-    $run_orders = mysqli_query($con,$get_orders);
-    while($row_order=mysqli_fetch_array($run_orders)){
-        $order_id = $row_order['order_id'];              
-        $c_id = $row_order['customer_id'];        
-        $invoice_no = $row_order['invoice_no'];        
-        $product_id = $row_order['product_id'];
-        $order_date = $row_order['order_date'];        
-        $order_amount = $row_order['due_amount'];        
-        $qty = $row_order['qty'];        
-        $size = $row_order['size'];        
-        $order_status = $row_order['order_status'];        
+<?php         
+        @$product_id = $_GET["product_id"];
         $get_products = "select * from products where product_id='$product_id'";        
         $run_products = mysqli_query($con,$get_products);        
         $row_products = mysqli_fetch_array($run_products);        
-        $product_title = $row_products['product_title'];        
-        $get_customer = "select * from customers where customer_id='$c_id'";        
-        $run_customer = mysqli_query($con,$get_customer);        
-        $row_customer = mysqli_fetch_array($run_customer);        
-        $customer_email = $row_customer['customer_email'];
-        $customer_address = $row_customer['customer_address'];
-    }
+        @$product_title = $row_products['product_title'];        
     ?>
 <body>
     <div class="container">
@@ -109,8 +90,8 @@ if(isset($_GET['order_id'])){
                         </p>
     				</div>
     				<div class="col-sm-4 text-center">
-    					<h3 class="mt-4 mb-3">Masukkan Review Disini</h3>
-    					<button type="button" name="add_review" id="add_review" class="btn btn-success">Review</button>
+    					<!-- <h3 class="mt-4 mb-3">Masukkan Review Disini</h3>
+    					<button type="button" name="add_review" id="add_review" class="btn btn-success">Review</button> -->
     				</div>
     			</div>
     		</div>

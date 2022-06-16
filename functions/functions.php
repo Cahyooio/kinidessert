@@ -98,8 +98,14 @@ function getRecom(){
     
     global $db;
     
+    // $c_recom = "select DISTINCT product_id from customer_orders order by qty DESC LIMIT 0,4";
+    // $run_crekom = mysqli_query($db,$c_recom);
+
     $get_products = "select * from products 
     INNER JOIN customer_orders ON products.product_id = customer_orders.product_id order by qty DESC LIMIT 0,4";
+    
+    // $get_products= "select distinct products.product_id, product_title, product_price, product_sale, product_img1, product_label, qty from products 
+    // INNER JOIN customer_orders ON products.product_id = customer_orders.product_id order by qty DESC LIMIT 0,4"
     
     $run_products = mysqli_query($db,$get_products);
     
@@ -153,7 +159,10 @@ function getRecom(){
             ";
 
         }
-        
+        $get_review = "select avg (user_rating) as rating from review_table where product_id= '$pro_id'";
+        $select_review = mysqli_query($db,$get_review);
+        $review = mysqli_fetch_array($select_review);
+        // var_dump ($review);
         echo "
         
         <div class='col-md-4 col-sm-6 single'>
@@ -193,10 +202,16 @@ function getRecom(){
                     </p>
                 
                     <p class='sold'><b>
-
-                        Terjual $pro_sold Produk
-
-                   </b> </p>
+                        
+                                        Terjual $pro_sold Produk <br> 
+                                        
+                                        <span class='fa fa-star ". ((intval($review['rating']) >=1) ? 'checked' : ' ')."'></span>
+                                        <span class='fa fa-star ". ((intval($review['rating']) >=2) ? 'checked' : ' ')."'></span>
+                                        <span class='fa fa-star ". ((intval($review['rating']) >=3) ? 'checked' : ' ')."'></span>
+                                        <span class='fa fa-star ". ((intval($review['rating']) >=4) ? 'checked' : ' ')."'></span>
+                                        <span class='fa fa-star ". ((intval($review['rating']) >=5) ? 'checked' : ' ')."'></span>
+                
+                                   </b> </p>
                 </div>
 
           
